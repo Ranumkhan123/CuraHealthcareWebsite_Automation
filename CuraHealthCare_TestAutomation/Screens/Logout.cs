@@ -30,8 +30,12 @@ namespace CuraHealthCare_TestAutomation.Screens
 
             //print the heading
             string headeroftheapp = driver.FindElement(header).Text;
-            Console.WriteLine("Heading: " + headeroftheapp);
+            Console.WriteLine("Logout: " + headeroftheapp);
             Console.WriteLine();
+            Thread.Sleep(4000);
+
+            var screenshot = ((ITakesScreenshot)driver).GetScreenshot();
+            screenshot.SaveAsFile("C:\\Users\\IT\\source\\repos\\CuraHealthCare_TestAutomation\\ss", ScreenshotImageFormat.Png);
 
             Thread.Sleep(1000);
 

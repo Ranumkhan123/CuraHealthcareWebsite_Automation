@@ -57,9 +57,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CorePage.cs" />
+    <Compile Include="Screens\History.cs" />
     <Compile Include="Screens\Login.cs" />
     <Compile Include="Screens\Logout.cs" />
     <Compile Include="Screens\MakeAppointment.cs" />
+    <Compile Include="Screens\Profiles.cs" />
+    <Compile Include="Screens\Sceenshot.cs" />
     <Compile Include="TestCases.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

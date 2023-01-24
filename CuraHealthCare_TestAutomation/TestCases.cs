@@ -6,24 +6,58 @@ namespace CuraHealthCare_TestAutomation
 {
     [TestClass]
     public class TestCases : CorePage
-    { 
-        Login login = new Login();
-        MakeAppointment appointment = new MakeAppointment(); 
-        Logout logout = new Logout();
+    {
 
 
+        #region Setups and Cleanups
+        public TestContext instance;
+
+        public TestContext TestContext
+        {
+            set { instance = value; }
+            get { return instance; }
+        }
+
+        //Before every class
+        [ClassInitialize()]
+        public static void ClassInit(TestContext context)
+        {
+
+        }
+
+        [ClassCleanup()]
+        public static void ClassCleanup()
+        {
+
+
+        }
 
         //The TestInitialize attribute is needed when we want to run a function before executing a test.
         [TestInitialize]
         public void TestInit()
         {
+            //The driver should always be called in the Test Initialize method
             CorePage.SeleniumInit();
         }
 
-
         //The TestCleanup will run after every test execution.
         [TestCleanup]
-        public void CleanUp() => driver.Quit();
+        public void TestCleanUp()
+        {
+            driver.Quit();
+        }
+        #endregion
+
+
+
+
+
+        Login login = new Login();
+        MakeAppointment appointment = new MakeAppointment();
+        Logout logout = new Logout();
+        History history = new History();
+        Profiles profiles = new Profiles();
+
 
 
         [TestMethod]
@@ -31,6 +65,8 @@ namespace CuraHealthCare_TestAutomation
         {
             login.LoginWithUser("https://katalon-demo-cura.herokuapp.com/");
             appointment.AppointmentForm();
+            history.HistoryScreen();
+            profiles.ProfilesTab();
             logout.LogoutWeb();
 
         }

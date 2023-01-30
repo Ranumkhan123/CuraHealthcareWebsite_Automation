@@ -1,4 +1,6 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +19,18 @@ namespace CuraHealthCare_TestAutomation.Screens
 
         public void ProfilesTab()
         {
+
+            //wait 
+            var clicktogglemenu = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            clicktogglemenu.Until(ExpectedConditions.ElementIsVisible(togglemenu));
+
             driver.FindElement(togglemenu).Click();
+
+
+            //wait 
+            var clickprofilebbutton = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            clickprofilebbutton.Until(ExpectedConditions.ElementIsVisible(profilebtn));
+
             driver.FindElement(profilebtn).Click();
 
             //Profile message

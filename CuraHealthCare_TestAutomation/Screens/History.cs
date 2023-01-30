@@ -1,4 +1,6 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +18,16 @@ namespace CuraHealthCare_TestAutomation.Screens
 
         public void HistoryScreen()
         {
+            //wait 
+            var clicktogglemenu = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            clicktogglemenu.Until(ExpectedConditions.ElementIsVisible(togglemenu));
+
             driver.FindElement(togglemenu).Click();
+
+            //wait 
+            var clickhistorybutton = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            clickhistorybutton.Until(ExpectedConditions.ElementIsVisible(historybtn));
+
             driver.FindElement(historybtn).Click();
 
             //Profile message

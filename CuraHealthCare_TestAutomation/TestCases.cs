@@ -1,6 +1,7 @@
 ﻿using CuraHealthCare_TestAutomation.Screens;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Configuration;
 
 namespace CuraHealthCare_TestAutomation
 {

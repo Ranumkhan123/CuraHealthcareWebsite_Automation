@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenQA.Selenium.Firefox;
 
 namespace CuraHealthCare_TestAutomation
 {
@@ -14,9 +15,16 @@ namespace CuraHealthCare_TestAutomation
 
         public static IWebDriver SeleniumInit()
         {
-            IWebDriver chromeDriver = new ChromeDriver();
-            driver = chromeDriver;
-            return driver;
+            
+                var chromeOptions = new ChromeOptions();
+             //   chromeOptions.AddArgument("--incognito");
+
+
+                IWebDriver chromeDriver = new ChromeDriver(chromeOptions);
+                driver = chromeDriver;
+                return driver;
+           
         }
+  
     }
 }

@@ -1,4 +1,6 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +18,7 @@ namespace CuraHealthCare_TestAutomation.Screens
         By username = By.XPath("//input[@id='txt-username']");
         By password = By.XPath("//input[@id='txt-password']");
         By clickloginbtn = By.XPath("//button[@id='btn-login']");
+        By makeappoitmentbtn = By.XPath("//a[@id='btn-make-appointment']");
         
 
 
@@ -30,7 +33,10 @@ namespace CuraHealthCare_TestAutomation.Screens
 
             //open application
             driver.Url = url;
-            Thread.Sleep(1000);
+            //wait screen visible
+            var waittoloadpage = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            waittoloadpage.Until(ExpectedConditions.ElementIsVisible(makeappoitmentbtn));
+
             //print the url
             Console.WriteLine("URL of the application:" + " " + url);
             Console.WriteLine();
@@ -46,7 +52,15 @@ namespace CuraHealthCare_TestAutomation.Screens
 
             //Login to the website
             driver.FindElement(togglemenu).Click();
+            //wait 
+            var loginbuttonwait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            loginbuttonwait.Until(ExpectedConditions.ElementIsVisible(loginbtn));
+
             driver.FindElement(loginbtn).Click();
+
+            //wait 
+            var usernamevisible = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            usernamevisible.Until(ExpectedConditions.ElementIsVisible(username));
 
             //Enter username and password
             string enterusername = "John Doe";
@@ -59,6 +73,9 @@ namespace CuraHealthCare_TestAutomation.Screens
             Console.WriteLine("Password: " + enterpassword); 
             Console.WriteLine();
 
+            //wait 
+            var waittoclickloginbutton = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            waittoclickloginbutton.Until(ExpectedConditions.ElementIsVisible(clickloginbtn));
 
             //click login button
             driver.FindElement(clickloginbtn).Click();

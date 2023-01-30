@@ -1,4 +1,6 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -23,22 +25,22 @@ namespace CuraHealthCare_TestAutomation.Screens
 
         public void LogoutWeb()
         {
+            //wait togglemenu button
+            var togglemenubtnwait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            togglemenubtnwait.Until(ExpectedConditions.ElementIsVisible(togglemenu));
+
             driver.FindElement(togglemenu).Click();
-            Thread.Sleep(2000);
+
+            //wait logout button
+            var logoutbtnwait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            logoutbtnwait.Until(ExpectedConditions.ElementIsVisible(logoutbtn));
+            //click logout
             driver.FindElement(logoutbtn).Click();
-            Thread.Sleep(1000);
 
             //print the heading
             string headeroftheapp = driver.FindElement(header).Text;
             Console.WriteLine("Logout: " + headeroftheapp);
             Console.WriteLine();
-            Thread.Sleep(4000);
-
-            var screenshot = ((ITakesScreenshot)driver).GetScreenshot();
-            screenshot.SaveAsFile("C:\\Users\\IT\\source\\repos\\CuraHealthCare_TestAutomation\\ss", ScreenshotImageFormat.Png);
-
-            Thread.Sleep(1000);
-
         }
 
     }

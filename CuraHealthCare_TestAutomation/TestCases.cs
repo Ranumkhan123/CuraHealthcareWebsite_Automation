@@ -62,9 +62,28 @@ namespace CuraHealthCare_TestAutomation
 
 
         [TestMethod]
+        
         public void TC01LogintoWebsite()
         {
-            login.LoginWithUser("https://katalon-demo-cura.herokuapp.com/");
+
+            login.LoginWithUser("https://katalon-demo-cura.herokuapp.com/", "John Doe", "ThisIsNotAPassword");
+            appointment.AppointmentForm();
+            history.HistoryScreen();
+            profiles.ProfilesTab();
+            logout.LogoutWeb();
+
+        }
+
+        //DATA DRIVEN 
+        [TestMethod]
+        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "Data.xml", "LoginTestCase", DataAccessMethod.Sequential)]
+        public void TC02LogintoWebsite()
+        {
+            string enterUN = TestContext.DataRow["enterUsername"].ToString();
+            string enterPW = TestContext.DataRow["enterPassword"].ToString();
+
+
+            login.LoginWithUser("https://katalon-demo-cura.herokuapp.com/", enterUN, enterPW);
             appointment.AppointmentForm();
             history.HistoryScreen();
             profiles.ProfilesTab();

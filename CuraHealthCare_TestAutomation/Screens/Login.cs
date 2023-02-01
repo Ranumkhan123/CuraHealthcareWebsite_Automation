@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using System;
@@ -19,11 +20,12 @@ namespace CuraHealthCare_TestAutomation.Screens
         By password = By.XPath("//input[@id='txt-password']");
         By clickloginbtn = By.XPath("//button[@id='btn-login']");
         By makeappoitmentbtn = By.XPath("//a[@id='btn-make-appointment']");
-        
+        By makeappoitmentheading = By.XPath("//h2[normalize-space()='Make Appointment']");
+        By unsuccessloggedinmessage = By.XPath("//p[contains(text(),'Login failed! Please ensure the username and passw')]");
 
 
 
-        public void LoginWithUser(string url)
+        public void LoginWithUser(string url, string enterusername, string enterpassword)
         {
             IJavaScriptExecutor scroll = (IJavaScriptExecutor)driver;
             //Action Actions = new Action(driver);
@@ -63,8 +65,8 @@ namespace CuraHealthCare_TestAutomation.Screens
             usernamevisible.Until(ExpectedConditions.ElementIsVisible(username));
 
             //Enter username and password
-            string enterusername = "John Doe";
-            string enterpassword = "ThisIsNotAPassword";
+           //string enterusername = "John Doe";
+           // string enterpassword = "ThisIsNotAPassword";
             driver.FindElement(username).SendKeys(enterusername);
             driver.FindElement(password).SendKeys(enterpassword);
 
@@ -79,8 +81,12 @@ namespace CuraHealthCare_TestAutomation.Screens
 
             //click login button
             driver.FindElement(clickloginbtn).Click();
-            Thread.Sleep(2000);
 
+            //wait 
+            var waitafterloggedin = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            waitafterloggedin.Until(ExpectedConditions.ElementIsVisible(makeappoitmentheading));
+
+           
         }
     }
 }
